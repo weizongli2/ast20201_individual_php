@@ -1,6 +1,6 @@
 <?php
         $servername=getenv("MYSQL_SERVICE_HOST");
-        $username=getenv("MYSQL_SERVICE_PORT");
-        $password=getenv("databasepassword");
+        $username="user1";
+        $password="root";
         $mysql_database=getenv("databasename");
         ?>
