@@ -51,7 +51,7 @@ and open the template in the editor.
                 color:white;
             }
             table, th, td {
-              border: 1px solid white;
+              border: 0.5px solid silver;
               margin:0 auto
             }
         </style>

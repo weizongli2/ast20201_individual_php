@@ -29,6 +29,9 @@
             if($_SESSION['usertype']=='teacher'){
                 echo '<script>window.location.href="TeacherPage.php";</script>';
             }
+            if($_SESSION['usertype']=='admin'){
+                echo '<script>window.location.href="TeacherPage.php";</script>';
+            }
             
         }else{
             echo 'No User exist!';

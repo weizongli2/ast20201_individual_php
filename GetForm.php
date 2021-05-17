@@ -73,8 +73,8 @@
                 echo '</table>';
                 echo '</form>';
                 echo '<p></p>';
-                echo '<td><input class="change_submit btn btn-primary" type="button" style="background-color:grey" name="'.$row["id"].'" value="Publish"></td>';
-                echo '<td><button class="preview btn btn-primary" style="background-color:grey" name="'.$course.'">Preview</button></td>';
+                echo '<td><input class="change_submit btn btn-primary" type="button" style="background-color:grey" name="'.$row["id"].'" value="Publish">&nbsp;</td>';
+                echo '<td>&nbsp;<button class="preview btn btn-primary" style="background-color:grey" name="'.$course.'">Preview</button></td>';
                 echo '</div>';
             }
         

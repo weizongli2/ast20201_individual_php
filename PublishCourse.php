@@ -45,11 +45,13 @@
             $sql2="UPDATE classinfo SET title='$title',date='$date',time='$time',URL='$URL',description='$description' WHERE id='$courseid'";
             $result2= $conn->query($sql2);
             
-            $sql3="SELECT * FROM userinfo WHERE usertype='$usertype'";
+            $sql3="SELECT * FROM userinfo WHERE usertype='student'";
             $result3= $conn->query($sql3);
             if($result3->num_rows>0){
-                while($row=$result3->fetch_assoc()){
-                    $sql4="INSERT INTO attendance (course,title,student_id,student_name) VALUES ('$course','$title','".$row['id']."','".$row['username']."')";
+                while($row3=$result3->fetch_assoc()){
+                    $sql4="INSERT INTO attendance (course,title,student_id,student_name) VALUES ('$course','$title','".$row3['id']."','".$row3['username']."')";
+                    $result4= $conn->query($sql4);
+//                    echo '<script>alert("'.$course.' information published successfully!");</script>';
                 }
             }
             

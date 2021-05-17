@@ -14,8 +14,15 @@
             $id=$_SESSION['id'];
             $user=$_SESSION['user'];
             $usertype=$_SESSION['usertype'];
-
-            $sql="UPDATE attendance SET situation='$situation' WHERE student_id='$student_id' AND course='$course' AND title='$title'";
-            $result= $conn->query($sql);
-            echo '<script>$(function(){var course="'.$course.'";$.post("checkAttendance.php",{course:course},function(data){$("#div_result").html(data);});});</script>';
+            
+            echo '<script>alert('.$situation.');</script>';
+            if($situation==""){
+                echo '<script>$(function(){var course="'.$course.'";$.post("checkAttendance.php",{course:course},function(data){$("#div_result").html(data);});});</script>';
+            }else{
+                $sql="UPDATE attendance SET situation='$situation' WHERE student_id='$student_id' AND course='$course' AND title='$title'";
+                $result= $conn->query($sql);
+                echo '<script>$(function(){var course="'.$course.'";var title="'.$title.'";$.post("search.php",{course:course,title:title},function(data){$("#div_result").html(data);});});</script>';
+            }
+            
+            
 

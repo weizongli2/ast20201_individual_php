@@ -38,3 +38,13 @@
                 echo '<li class="nav-item"><form class="form-inline"><input type="button" id="btn_addcourse" name="btn_course" class="form-control" value="all"/></form></li>';
              }
         }
+        if($usertype=="admin"){
+            $sql="SELECT * FROM classinfo";
+            $result= $conn->query($sql);
+        
+            if($result->num_rows>0){
+                while($row=$result->fetch_assoc()){
+                    echo '<li class="nav-item"><form class="form-inline"><input type="button" id="btn_addcourse" name="btn_course" class="form-control" value="'.$row['course'].'"/></form></li>';
+                }
+             }
+        }

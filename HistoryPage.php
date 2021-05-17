@@ -119,13 +119,32 @@ function logout(){
 			}
                     );
                 });
+                
+                $(document).on("click",".search",function (){
+                    var course = $(this).attr('name');
+                    var search = $("#search_field").val();
+//                    alert(course);
+//                    alert(search);
+               $.post(
+                    "search.php",
+			{
+                         course:course,
+                         title:search
+			},
+                        function(data){
+                            $("#div_result").html("Loading...");
+                            $("#div_result").html(data);
+			}
+                    );
+                });
             
     $(document).on("click",".change_submit",function() {
         
         var student_id = $(this).attr('name');
-        var course=$("#course").val();
-        var situation=$("#selecter").val();
-        var title=$("#title").val();
+        var course=$("#course"+student_id+"").val();
+        var situation=$("#selecter"+student_id+"").val();
+        var title=$("#title"+student_id+"").val();
+        
         
 //        alert(student_id);
 //        alert(course);
@@ -145,6 +164,40 @@ function logout(){
 			}
                     );
         });
+        
+        $(document).on("click","#saveall",function(){
+           var ToSave=[];
+           $('select[name="selectboxes"]').each(function(){
+               var temp=$(this).val().toString();
+               ToSave.push(temp);
+//               alert(temp);
+           });
+           var student_ids=[];
+           $('input[name="student_id"]').each(function(){
+               var temp=$(this).val().toString();
+               student_ids.push(temp);
+           });
+           var titles=[];
+           $('input[name="title"]').each(function(){
+               var temp=$(this).val().toString();
+               titles.push(temp);
+           });
+           if(ToSave.length>0){
+               $.post(
+                    "ChangeAllAttendance.php",
+			{
+                         ToSave:JSON.stringify(ToSave),
+                         student_ids:JSON.stringify(student_ids),
+                         titles:JSON.stringify(titles)
+			},
+                        function(data){
+                            $("#div_result").html(data);
+			}
+                    );
+           }
+           
+        });
+        
     });
 
  </script>
