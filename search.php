@@ -1,6 +1,6 @@
 <?php
             require ("db_config.php");
-        
+
             $conn=new mysqli($servername,$username,$password,$mysql_database);
 
             if($conn->connect_error){
@@ -10,28 +10,28 @@
             $id=$_SESSION['id'];
             $user=$_SESSION['user'];
             $usertype=$_SESSION['usertype'];
-            
+
             $course=filter_input(INPUT_POST,'course');
             $title= filter_input(INPUT_POST, 'title');
-            
+
 //            echo '<script>alert('.$course.');</script>';
 //            echo '<script>alert('.$title.');</script>';
 //            echo 'this is for test';
             $sql="SELECT * FROM attendance WHERE student_id='$id' AND course='$course' AND title='$title'";
-            
+
            if($course=="all"){
                $sql="SELECT * FROM attendance WHERE student_id='$id' AND title='$title'";
-           } 
-            
+           }
+
             if($usertype=="teacher"){
-                $sql="SELECT * FROM attendance WHERE course='$course' AND title='$title'";  
+                $sql="SELECT * FROM attendance WHERE course='$course' AND title='$title'";
             }else if($usertype=="admin"){
                 $sql="SELECT * FROM attendance WHERE course='$course' AND title='$title'";
                 if($course=="all"){
                     $sql="SELECT * FROM attendance WHERE title='$title'";
                 }
             }
-            
+
             $result= $conn->query($sql);
             echo '<div>&nbsp;</div>';
             echo '<form class="form-inline" id="search_form"><input class="form-control" type="text" id="search_field" placeholder="Search title here">&nbsp;<input class="search btn btn-primary" type="button" style="background-color:grey" name="'.$course.'" value="Search">&nbsp;<input id="saveall" class="btn btn-primary" type="button" style="background-color:grey" value="Save All"></form>';
@@ -52,13 +52,13 @@
             }
             echo '</tr>';
             echo '</thead>';
-            
+
             if($result->num_rows>0){
                 while($row=$result->fetch_assoc()){
                     echo '<tr>';
                     if($usertype=="teacher"||$usertype=="admin"){
                         echo '<form id="form_'.$row['student_id'].'">';
-                        echo '<td><input class="form-control" type="text" id="course'.$row['student_id'].'" value="'.$row['course'].'" readonly></td>';
+                        echo '<td><input class="form-control" type="text" id="course" value="'.$row['course'].'" readonly></td>';
                         echo '<td><input class="form-control" type="text" id="title'.$row['student_id'].'" name="title" value="'.$row['title'].'" readonly></td>';
                         echo '<td><input class="form-control" type="text" id="student_id'.$row['student_id'].'" name="student_id" value="'.$row['student_id'].'" readonly></td>';
                     }else{
@@ -83,4 +83,3 @@
                     echo '</table>';
                     echo '</div>';
             }
-

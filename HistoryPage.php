@@ -24,15 +24,15 @@
                $.post(
                     "GetCourse.php",
 			{
-                         
+
 			},
                         function(data){
                             $("#courses").html(data);
 			}
                     );
                 });
-                
-                
+
+
         $(document).ready(function() {
             $("input[name='btn_course']").click(function (){
                 var course = $(this).val();
@@ -91,9 +91,9 @@ function logout(){
           </form>
       </li>
     </ul>
-      
+
   </div>
-  
+
         <div class="dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
               <img src="materials/user.png" style="width:10%">
@@ -119,7 +119,7 @@ function logout(){
 			}
                     );
                 });
-                
+
                 $(document).on("click",".search",function (){
                     var course = $(this).attr('name');
                     var search = $("#search_field").val();
@@ -137,20 +137,20 @@ function logout(){
 			}
                     );
                 });
-            
+
     $(document).on("click",".change_submit",function() {
-        
+
         var student_id = $(this).attr('name');
         var course=$("#course"+student_id+"").val();
         var situation=$("#selecter"+student_id+"").val();
         var title=$("#title"+student_id+"").val();
-        
-        
+
+
 //        alert(student_id);
 //        alert(course);
 //        alert(situation);
 //        alert(title);
-        
+
             $.post(
                     "ChangeAttendance.php",
 			{
@@ -164,7 +164,7 @@ function logout(){
 			}
                     );
         });
-        
+
         $(document).on("click","#saveall",function(){
            var ToSave=[];
            $('select[name="selectboxes"]').each(function(){
@@ -182,22 +182,24 @@ function logout(){
                var temp=$(this).val().toString();
                titles.push(temp);
            });
+           var course=$("#course").val();
            if(ToSave.length>0){
                $.post(
                     "ChangeAllAttendance.php",
 			{
                          ToSave:JSON.stringify(ToSave),
                          student_ids:JSON.stringify(student_ids),
-                         titles:JSON.stringify(titles)
+                         titles:JSON.stringify(titles),
+                         course:course
 			},
                         function(data){
                             $("#div_result").html(data);
 			}
                     );
            }
-           
+
         });
-        
+
     });
 
  </script>
